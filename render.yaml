@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: moonlight-assistant
+    plan: free
+    rootDir: .
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: ALICE_SECRET
+        sync: false
+      - key: TV_SECRET
+        sync: false
