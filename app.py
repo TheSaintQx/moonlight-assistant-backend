@@ -1,109 +1,240 @@
 """
-Moonlight Assistant — мультиигровой.
-KB загружается из файла (TV шлёт его), Алиса получает мгновенный ответ,
-TV опрашивает оверлей.
+Moonlight Assistant — Full Multi-Client Support.
+Supports:
+1. Yandex Alice / Dialogs Webhook
+2. Android TV Client (Moonlight) for KB, Context, and Overlay
 """
-import os, time, logging
-from typing import Optional
-from fastapi import FastAPI, Request, Query, Header
+import os
+import json
+import time
+import logging
+from pathlib import Path
+from typing import Optional, List, Dict
+from fastapi import FastAPI, Request, Query, HTTPException, Header
 from fastapi.responses import JSONResponse
-from kb.engine import parse_kb
 
+# ─── ЛОГИРОВАНИЕ И ИМПОРТЫ ───
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger("moonlight")
 
-GEMINI_KEY = os.environ.get("GEMINI_API_KEY", "")
+# Импорт движка (kb/engine.py)
+try:
+    from kb.engine import parse_kb
+except ImportError:
+    parse_kb = None
 
-# device/session → {engine, last_overlay, overlay_ts, overlay_ttl}
-sessions: dict[str, dict] = {}
-DEFAULT_SESSION = "default"
+GEMINI_KEY = os.environ.get("GEMINI_API_KEY", "")
+ASSISTANT_TOKEN = os.environ.get("ASSISTANT_TOKEN", "secret") # Для проверки
 
 app = FastAPI(title="Moonlight Assistant")
 
+# Хранилище сессий: session_id -> { "engine": Engine, "context": {...}, "overlay": {...} }
+sessions = {}
+
+# ─── ИНИЦИАЛИЗАЦИЯ ДВИЖКА ПО УМОЛЧАНИЮ ───
+# Если в репо лежит файл data/ghost_of_tsushima/kb.json, загрузим его как дефолт
+default_engine = None
+default_kb_path = Path("data/ghost_of_tsushima/kb.json")
+if default_kb_path.exists() and parse_kb:
+    try:
+        kb_text = default_kb_path.read_text(encoding="utf-8")
+        default_engine = parse_kb(kb_text, GEMINI_KEY)
+        log.info(f"Default engine loaded from {default_kb_path}. Articles: {len(default_engine.articles)}")
+    except Exception as e:
+        log.warning(f"Could not load default KB: {e}")
+
+# ─── УТИЛИТЫ ───
+def get_or_create_session(session_id: str) -> dict:
+    if session_id not in sessions:
+        sessions[session_id] = {
+            "engine": default_engine,
+            "context": {"region": "", "act": 0, "spoilers_enabled": True},
+            "last_id": None,
+            "overlay": None,
+            "overlay_ts": 0,
+            "overlay_ttl": 8
+        }
+    return sessions[session_id]
+
+def process_query(text: str, context: dict, engine) -> dict:
+    if not engine:
+        return {"answer": "База знаний не загружена.", "voice": "База не загружена.", "sources": [], "overlay": None}
+    try:
+        return engine.ask(text, context)
+    except Exception as e:
+        log.error(f"Error in engine: {e}")
+        return {"answer": "Ошибка обработки запроса.", "voice": "Ошибка.", "sources": [], "overlay": None}
+
+def check_token(authorization: str = ""):
+    if not authorization.startswith("Bearer "):
+        raise HTTPException(status_code=401, detail="Invalid token")
+    token = authorization.split(" ")[1]
+    if token != ASSISTANT_TOKEN:
+        raise HTTPException(status_code=401, detail="Invalid token")
+
+# ═══════════════════════════════════════════════════════════════
+# 1. АЛИСА / ЯНДЕКС ДИАЛОГИ (WEBHOOK)
+# ═══════════════════════════════════════════════════════════════
+
+@app.post("/v1/alicewebhook")
+async def alice_webhook(request: Request):
+    """
+    Официальный обработчик для Yandex Dialogs Webhook.
+    """
+    body = await request.json()
+    
+    # Извлекаем данные
+    req = body.get("request", {})
+    session_data = body.get("session", {})
+    
+    utterance = (req.get("original_utterance") or req.get("command") or "").strip()
+    # Используем user_id для привязки сессии (или session_id, если нужно глобально)
+    alice_session_id = session_data.get("user_id", "default_alice_user")
+    
+    log.info(f"[ALICE] Query: '{utterance}' | Session: {alice_session_id}")
+    
+    if not utterance:
+        return JSONResponse(content={"error": "Empty utterance"}, status_code=400)
+    
+    lower = utterance.lower()
+    s = get_or_create_session(alice_session_id)
+    ctx = s["context"]
+    
+    # Служебные команды
+    if lower in ("стоп", "тише", "хватит", "молчи"):
+        return {"status": "succeeded", "text": ""}
+    
+    # Обновление контекста
+    if lower.startswith("я в ") or lower.startswith("я на "):
+        region_map = {
+            "идзухара": "izuhara", "идзухаре": "izuhara", "идзухары": "izuhara",
+            "тоетама": "toyotama", "тоётама": "toyotama",
+            "камиагата": "kamiagata",
+            "ики": "iki", "остров ики": "iki"
+        }
+        for key, val in region_map.items():
+            if key in lower:
+                ctx["region"] = val
+                log.info(f"[ALICE] Context updated: Region={val}")
+                return {"status": "succeeded", "text": f"Запомнил, ты в {val.title()}."}
+        
+        for phrase, act_num in [("первый акт", 1), ("акт 1", 1),
+                                ("второй акт", 2), ("акт 2", 2),
+                                ("третий акт", 3), ("акт 3", 3)]:
+            if phrase in lower:
+                ctx["act"] = act_num
+                return {"status": "succeeded", "text": f"Запомнил, ты на {act_num}-м акте."}
+                
+        return {"status": "succeeded", "text": "Не понял. Скажи регион или акт."}
+
+    if lower in ("без спойлеров", "не порть сюжет"):
+        ctx["spoilers_enabled"] = False
+        return {"status": "succeeded", "text": "Окей, без спойлеров."}
+
+    if lower in ("подробнее", "расскажи подробнее"):
+        last = s.get("last_id")
+        art = s["engine"].articles.get(last, {}) if last and s.get("engine") else {}
+        if not art:
+            return {"status": "succeeded", "text": "Сначала задай основной вопрос."}
+        d = art.get("quick_answer", art.get("summary", ""))
+        for f in art.get("facts", [])[:3]:
+            text = f.get("text", "") if isinstance(f, dict) else str(f)
+            d += " " + text
+        return {"status": "succeeded", "text": d[:400]}
+
+    if lower in ("кратко", "короче"):
+        last = s.get("last_id")
+        art = s["engine"].articles.get(last, {}) if last and s.get("engine") else {}
+        if not art:
+            return {"status": "succeeded", "text": "Сначала задай основной вопрос."}
+        return {"status": "succeeded", "text": art.get("voice_answer", art.get("summary", ""))[:100]}
+
+    if lower in ("сверни", "убери", "закрой"):
+        s["overlay"] = None
+        return {"status": "succeeded", "text": "Убрал."}
+
+    # Основной запрос
+    result = process_query(utterance, ctx, s["engine"])
+    
+    # Сохраняем оверлей
+    if result.get("overlay"):
+        s["overlay"] = result["overlay"]
+        s["overlay_ts"] = time.time()
+    
+    if result.get("sources"):
+        s["last_id"] = result["sources"][0]
+
+    voice_text = result.get("voice") or result.get("answer")
+    if result.get("follow_up"):
+        voice_text += " " + result["follow_up"]
+        
+    return {"status": "succeeded", "text": voice_text}
+
+# ═══════════════════════════════════════════════════════════════
+# 2. АНДРОИД КЛИЕНТ (MOONLIGHT)
+# ═══════════════════════════════════════════════════════════════
+
+@app.post("/v1/kb")
+async def import_kb(request: Request, authorization: str = Header(default="")):
+    """
+    Android Client загружает базу.
+    """
+    check_token(authorization)
+    kb_data = await request.json()
+    
+    if "articles" not in kb_data:
+        raise HTTPException(400, "Missing 'articles'")
+    
+    if not parse_kb:
+        raise HTTPException(500, "Engine not available")
+        
+    # Используем дефолтную сессию или можно парсить сессию из других параметров, если бы они были
+    s = get_or_create_session("android_client_default")
+    
+    try:
+        engine = parse_kb(json.dumps(kb_data, ensure_ascii=False), GEMINI_KEY)
+        s["engine"] = engine
+        s["overlay"] = None
+        log.info(f"[ANDROID] KB Loaded. Articles: {len(engine.articles)}")
+        return {"status": "success", "articles_count": len(engine.articles)}
+    except Exception as e:
+        log.error(f"Error parsing KB: {e}")
+        raise HTTPException(500, f"Failed to parse KB: {str(e)}")
+
+@app.post("/v1/context/frame")
+async def context_frame(request: Request, authorization: str = Header(default="")):
+    """
+    Android Client шлет кадры. Пока просто принимаем.
+    """
+    check_token(authorization)
+    # В будущем здесь будет анализ OpenCV/Vision
+    return {"status": "received"}
+
+@app.get("/v1/overlay/pending")
+def overlay_pending(authorization: str = Header(default="")):
+    """
+    Android Client опрашивает оверлей.
+    """
+    check_token(authorization)
+    s = get_or_create_session("android_client_default")
+    overlay = s.get("overlay")
+    
+    if not overlay:
+        return {"overlay": None}
+        
+    age = time.time() - s.get("overlay_ts", 0)
+    if age > s.get("overlay_ttl", 8):
+        s["overlay"] = None
+        return {"overlay": None}
+        
+    # Формируем ответ в формате, который ожидает клиент (mode: circle/arrow)
+    # Пока передаем как есть, или можем маппить если нужно
+    return {"overlay": overlay}
+
 @app.get("/health")
 def health():
-    return {"ok":True,"sessions":len(sessions),
-            "active":{k:(v["engine"].game if v.get("engine") else None)
-                      for k,v in sessions.items()}}
-
-# ── TV выбирает файл → шлёт сюда ──
-@app.post("/import_kb")
-async def import_kb(request: Request,
-                    x_session: str = Header(default=DEFAULT_SESSION)):
-    raw = await request.json()          # содержимое .kb.json целиком
-    engine = parse_kb(_to_str(raw), GEMINI_KEY)
-    sessions.setdefault(x_session, {})["engine"] = engine
-    sessions[x_session]["overlay"] = None
-    log.info("session=%s loaded game=%s articles=%d faq=%d",
-             x_session, engine.game, len(engine.articles), len(engine.faq))
-    return {"ok":True,"game":engine.game,
-            "articles":len(engine.articles),"faq":len(engine.faq)}
-
-def _to_str(x):
-    return x if isinstance(x,str) else __import__("json").dumps(x, ensure_ascii=False)
-
-# ── Алиса ──
-@app.post("/alicewebhook")
-async def alice(request: Request):
-    body = await request.json()
-    q = (body.get("message") or "").strip()
-    state = body.get("state", {}) or {}
-    sess = state.get("session", DEFAULT_SESSION)
-
-    s = sessions.get(sess) or sessions.get(DEFAULT_SESSION)
-    engine = s["engine"] if s and s.get("engine") else None
-    if not engine:
-        return {"text":"Сначала выбери базу знаний в настройках.","state":state}
-
-    low = q.lower()
-    if low in ("стоп","тише","хватит","молчи"):
-        return {"text":"","state":state}
-    if low in ("подробнее","расскажи подробнее","ещё деталей"):
-        last = s.get("last_id") if s else None
-        art = engine.articles.get(last, {}) if last else {}
-        d = (art.get("quick_answer") or art.get("summary",""))
-        for f in art.get("facts",[])[:3]:
-            d += " " + (f.get("text","") if isinstance(f,dict) else str(f))
-        return {"text":d[:400],"state":state}
-    if low in ("кратко","короче"):
-        last = s.get("last_id") if s else None
-        art = engine.articles.get(last, {}) if last else {}
-        return {"text":art.get("voice_answer") or art.get("summary","")[:100],
-                "state":state}
-    if low in ("сверни","убери","закрой"):
-        if s: s["overlay"] = None
-        return {"text":"Убрал.","state":state}
-
-    ctx = {"act":state.get("act",0),"region":state.get("region",""),
-           "spoilers_enabled":state.get("spoilers_enabled",True)}
-    r = engine.ask(q, ctx)
-
-    if s:
-        s["last_id"] = (r["sources"][0] if r["sources"] else None)
-        s["overlay"] = r["overlay"]
-        s["overlay_ts"] = time.time()
-        s["overlay_ttl"] = 8
-
-    text = r["voice"] or r["answer"]
-    if r.get("follow_up"):
-        text += " " + r["follow_up"]
-    return {"text":text,
-            "state":dict(state, session=sess, last_article=r["sources"][:1] or [])}
-
-# ── TV опрашивает оверлей ──
-@app.get("/overlay")
-def overlay(session: str = Query(default=DEFAULT_SESSION)):
-    s = sessions.get(session) or sessions.get(DEFAULT_SESSION)
-    if not s or not s.get("overlay"):
-        return {"overlay":None,"game":None}
-    age = time.time() - s.get("overlay_ts",0)
-    if age > s.get("overlay_ttl",8):
-        s["overlay"] = None
-        return {"overlay":None,"game":None}
-    return {"overlay":s["overlay"],
-            "ttl_remaining":max(0,int(s.get("overlay_ttl",8)-age)),
-            "game":s.get("engine").game if s.get("engine") else None}
+    return {"ok": True, "engine_loaded": default_engine is not None}
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=int(os.environ.get("PORT",8000)))
+    uvicorn.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 8000)))
