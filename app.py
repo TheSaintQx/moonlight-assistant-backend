@@ -135,6 +135,20 @@ def check_token(authorization: str = ""):
 # 1. АЛИСА / ЯНДЕКС ДИАЛОГИ (WEBHOOK)
 # ═══════════════════════════════════════════════════════════════
 
+def _alice_response(text: str, end_session: bool = False, session_data: dict | None = None) -> dict:
+    """Формирует ответ в формате Яндекс.Диалогов."""
+    text = (text or "")[:500]
+    tts = text.replace("*", "").replace("#", "").replace("\n", ". ")
+    return {
+        "version": "1.0",
+        "session": session_data or {},
+        "response": {
+            "text": text,
+            "tts": tts,
+            "end_session": end_session
+        }
+    }
+
 @app.post("/v1/alicewebhook")
 async def alice_webhook(request: Request):
     """
@@ -153,7 +167,7 @@ async def alice_webhook(request: Request):
     log.info(f"[ALICE] Query: '{utterance}' | Session: {alice_session_id}")
     
     if not utterance:
-        return JSONResponse(content={"error": "Empty utterance"}, status_code=400)
+        return JSONResponse(content=_alice_response("", False, session_data), status_code=200)
     
     lower = utterance.lower()
     s = get_or_create_session(alice_session_id)
@@ -161,7 +175,7 @@ async def alice_webhook(request: Request):
     
     # Служебные команды
     if lower in ("стоп", "тише", "хватит", "молчи"):
-        return {"status": "succeeded", "text": ""}
+        return _alice_response("", True, session_data)
     
     # Обновление контекста
     if lower.startswith("я в ") or lower.startswith("я на "):
@@ -175,42 +189,42 @@ async def alice_webhook(request: Request):
             if key in lower:
                 ctx["region"] = val
                 log.info(f"[ALICE] Context updated: Region={val}")
-                return {"status": "succeeded", "text": f"Запомнил, ты в {val.title()}."}
+                return _alice_response(f"Запомнил, ты в {val.title()}.", False, session_data)
         
         for phrase, act_num in [("первый акт", 1), ("акт 1", 1),
                                 ("второй акт", 2), ("акт 2", 2),
                                 ("третий акт", 3), ("акт 3", 3)]:
             if phrase in lower:
                 ctx["act"] = act_num
-                return {"status": "succeeded", "text": f"Запомнил, ты на {act_num}-м акте."}
+                return _alice_response(f"Запомнил, ты на {act_num}-м акте.", False, session_data)
                 
-        return {"status": "succeeded", "text": "Не понял. Скажи регион или акт."}
+        return _alice_response("Не понял. Скажи регион или акт.", False, session_data)
 
     if lower in ("без спойлеров", "не порть сюжет"):
         ctx["spoilers_enabled"] = False
-        return {"status": "succeeded", "text": "Окей, без спойлеров."}
+        return _alice_response("Окей, без спойлеров.", False, session_data)
 
     if lower in ("подробнее", "расскажи подробнее"):
         last = s.get("last_id")
         art = s["engine"].articles.get(last, {}) if last and s.get("engine") else {}
         if not art:
-            return {"status": "succeeded", "text": "Сначала задай основной вопрос."}
+            return _alice_response("Сначала задай основной вопрос.", False, session_data)
         d = art.get("quick_answer", art.get("summary", ""))
         for f in art.get("facts", [])[:3]:
             text = f.get("text", "") if isinstance(f, dict) else str(f)
             d += " " + text
-        return {"status": "succeeded", "text": d[:400]}
+        return _alice_response(d[:400], False, session_data)
 
     if lower in ("кратко", "короче"):
         last = s.get("last_id")
         art = s["engine"].articles.get(last, {}) if last and s.get("engine") else {}
         if not art:
-            return {"status": "succeeded", "text": "Сначала задай основной вопрос."}
-        return {"status": "succeeded", "text": art.get("voice_answer", art.get("summary", ""))[:100]}
+            return _alice_response("Сначала задай основной вопрос.", False, session_data)
+        return _alice_response(art.get("voice_answer", art.get("summary", ""))[:100], False, session_data)
 
     if lower in ("сверни", "убери", "закрой"):
         s["overlay"] = None
-        return {"status": "succeeded", "text": "Убрал."}
+        return _alice_response("Убрал.", False, session_data)
 
     # ── КАРТА: «где хайку / покажи маяк / ближайший источник» ──
     # Локальная логика — не ждём LLM, отвечаем мгновенно
@@ -224,11 +238,11 @@ async def alice_webhook(request: Request):
             s["overlay_ttl"] = pt.get("ttl", 8)
             region = ctx.get("region", "")
             region_txt = f" (ближе к {region.title()})" if region else ""
-            return {
-                "status": "succeeded",
-                "text": f"{pt['label']}{region_txt} — координаты переданы на карту. "
-                        f"Кружок появится в углу на {pt.get('ttl', 8)} секунд."
-            }
+            return _alice_response(
+                f"{pt['label']}{region_txt} — координаты переданы на карту. "
+                f"Кружок появится в углу на {pt.get('ttl', 8)} секунд.",
+                False, session_data
+            )
 
     # Основной запрос
     result = process_query(utterance, ctx, s["engine"])
@@ -245,7 +259,7 @@ async def alice_webhook(request: Request):
     if result.get("follow_up"):
         voice_text += " " + result["follow_up"]
         
-    return {"status": "succeeded", "text": voice_text}
+    return _alice_response(voice_text, False, session_data)
 
 # ═══════════════════════════════════════════════════════════════
 # 2. АНДРОИД КЛИЕНТ (MOONLIGHT)
