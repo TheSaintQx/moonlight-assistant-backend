@@ -26,6 +26,65 @@ except ImportError:
 GEMINI_KEY = os.environ.get("GEMINI_API_KEY", "")
 ASSISTANT_TOKEN = os.environ.get("ASSISTANT_TOKEN", "secret") # Для проверки
 
+# ─── КАРТА: координаты меток для локального HTML-оверлея ───
+# Файл кладётся рядом с app.py: data/ghost_of_tsushima/tsushima_map_data.json
+# Формат: {"image":"tsushima.png","points":[{"id","type","color","x","y"}]}
+MAP_DATA_PATH = Path(os.environ.get("MAP_DATA_PATH", "data/ghost_of_tsushima/tsushima_map_data.json"))
+
+# Ключевые слова, по которым Алиса должна показать точку на карте
+# (запускать ДО основного process_query, чтобы не ждать LLM)
+MAP_KEYWORDS = {
+    "haiku":    ["хайку", "poetic haiku", "поэтический хайку"],
+    "hot_spring":["источник", "горяч", "сено", "банный"],
+    "shrine":   ["святилищ", "инвари", "инари", "бамбук", "амулет"],
+    "lighthouse":["маяк", "маяки"],
+    "duel":     ["дуэл", "смертельный"],
+    "generic":  ["где", "покажи", "ближайш", "на карте", "маркер"],
+}
+# Приоритет: если найден конкретный тип — используем его; иначе — generic (случайная из всех)
+def find_map_point(utterance: str, data: dict) -> dict | None:
+    lower = utterance.lower()
+    for point_type, words in MAP_KEYWORDS.items():
+        if any(w in lower for w in words):
+            pts = [p for p in data.get("points", [])
+                   if p.get("type") == point_type or p.get("color") == point_type]
+            if pts:
+                import random
+                p = random.choice(pts)
+                name_map = {"haiku":"Хайку","hot_spring":"Горячий источник","shrine":"Святилище",
+                            "lighthouse":"Маяк","duel":"Смертельная дуэль"}
+                label = p.get("label") or name_map.get(point_type, point_type.title())
+                return {
+                    "mode": "map",
+                    "x": p["x"], "y": p["y"],
+                    "label": label,
+                    "ttl": 8,
+                    "image": data.get("image", "tsushima.png"),
+                    "hint": "tsushima_offline_map.html",
+                }
+    # Generic «где/покажи/ближайший» — берём случайную из всех точек
+    all_pts = data.get("points", [])
+    if all_pts and any(w in lower for w in MAP_KEYWORDS["generic"]):
+        import random
+        p = random.choice(all_pts)
+        return {
+            "mode": "map",
+            "x": p["x"], "y": p["y"],
+            "label": p.get("label", p.get("id", "Точка")),
+            "ttl": 8,
+            "image": data.get("image", "tsushima.png"),
+            "hint": "tsushima_offline_map.html",
+        }
+    return None
+
+def load_map_data() -> dict | None:
+    if MAP_DATA_PATH.exists():
+        try:
+            return json.loads(MAP_DATA_PATH.read_text(encoding="utf-8"))
+        except Exception as e:
+            log.warning(f"Map data load failed: {e}")
+    return None
+
 app = FastAPI(title="Moonlight Assistant")
 
 # Хранилище сессий: session_id -> { "engine": Engine, "context": {...}, "overlay": {...} }
@@ -152,6 +211,24 @@ async def alice_webhook(request: Request):
     if lower in ("сверни", "убери", "закрой"):
         s["overlay"] = None
         return {"status": "succeeded", "text": "Убрал."}
+
+    # ── КАРТА: «где хайку / покажи маяк / ближайший источник» ──
+    # Локальная логика — не ждём LLM, отвечаем мгновенно
+    map_data = s.get("_map_data") or load_map_data()
+    if map_data:
+        s["_map_data"] = map_data  # кэшируем в сессии
+        pt = find_map_point(utterance, map_data)
+        if pt:
+            s["overlay"] = pt
+            s["overlay_ts"] = time.time()
+            s["overlay_ttl"] = pt.get("ttl", 8)
+            region = ctx.get("region", "")
+            region_txt = f" (ближе к {region.title()})" if region else ""
+            return {
+                "status": "succeeded",
+                "text": f"{pt['label']}{region_txt} — координаты переданы на карту. "
+                        f"Кружок появится в углу на {pt.get('ttl', 8)} секунд."
+            }
 
     # Основной запрос
     result = process_query(utterance, ctx, s["engine"])

@@ -1,0 +1,2019 @@
+{
+ "game": "ghost_of_tsushima",
+ "title": "Ghost of Tsushima — Tsushima",
+ "image": "tsushima.png",
+ "image_width": 4495,
+ "image_height": 14372,
+ "description": "Офлайн-карта Цусимы. Координаты из MapGenie (HTTrack).",
+ "color_map": {
+  "purple": "haiku",
+  "red": "collectibles_mixed",
+  "blue": "shrines_mixed"
+ },
+ "points": [
+  {
+   "id": "p1",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.1824,
+   "y": 0.1824
+  },
+  {
+   "id": "p2",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.2049,
+   "y": 0.2108
+  },
+  {
+   "id": "p3",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.2118,
+   "y": 0.2204
+  },
+  {
+   "id": "p4",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.2885,
+   "y": 0.2616
+  },
+  {
+   "id": "p5",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.1718,
+   "y": 0.2635
+  },
+  {
+   "id": "p6",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.1716,
+   "y": 0.2755
+  },
+  {
+   "id": "p7",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.3748,
+   "y": 0.307
+  },
+  {
+   "id": "p8",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.293,
+   "y": 0.3182
+  },
+  {
+   "id": "p9",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.1429,
+   "y": 0.3714
+  },
+  {
+   "id": "p10",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.3802,
+   "y": 0.382
+  },
+  {
+   "id": "p11",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.2404,
+   "y": 0.5071
+  },
+  {
+   "id": "p12",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.3231,
+   "y": 0.5244
+  },
+  {
+   "id": "p13",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.4039,
+   "y": 0.6647
+  },
+  {
+   "id": "p14",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.2373,
+   "y": 0.8637
+  },
+  {
+   "id": "p15",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.3882,
+   "y": 0.8618
+  },
+  {
+   "id": "p16",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.2235,
+   "y": 0.9431
+  },
+  {
+   "id": "p17",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.349,
+   "y": 0.9706
+  },
+  {
+   "id": "p18",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.3824,
+   "y": 0.9745
+  },
+  {
+   "id": "p19",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.8192,
+   "y": 0.9926
+  },
+  {
+   "id": "r1",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.257,
+   "y": 0.0116
+  },
+  {
+   "id": "r2",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3733,
+   "y": 0.0024
+  },
+  {
+   "id": "r3",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.2471,
+   "y": 0.0779
+  },
+  {
+   "id": "r4",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.4037,
+   "y": 0.0763
+  },
+  {
+   "id": "r5",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.2337,
+   "y": 0.103
+  },
+  {
+   "id": "r6",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3422,
+   "y": 0.1161
+  },
+  {
+   "id": "r7",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3076,
+   "y": 0.1163
+  },
+  {
+   "id": "r8",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.1897,
+   "y": 0.1398
+  },
+  {
+   "id": "r9",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3824,
+   "y": 0.1452
+  },
+  {
+   "id": "r10",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.2216,
+   "y": 0.1451
+  },
+  {
+   "id": "r11",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.2583,
+   "y": 0.1522
+  },
+  {
+   "id": "r12",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3948,
+   "y": 0.1651
+  },
+  {
+   "id": "r13",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3184,
+   "y": 0.1826
+  },
+  {
+   "id": "r14",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.1666,
+   "y": 0.1864
+  },
+  {
+   "id": "r15",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.2244,
+   "y": 0.2041
+  },
+  {
+   "id": "r16",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3442,
+   "y": 0.2064
+  },
+  {
+   "id": "r17",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.1432,
+   "y": 0.2059
+  },
+  {
+   "id": "r18",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3092,
+   "y": 0.2133
+  },
+  {
+   "id": "r19",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.1692,
+   "y": 0.2301
+  },
+  {
+   "id": "r20",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.1986,
+   "y": 0.2318
+  },
+  {
+   "id": "r21",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.4259,
+   "y": 0.2575
+  },
+  {
+   "id": "r22",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.2961,
+   "y": 0.2606
+  },
+  {
+   "id": "r23",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3875,
+   "y": 0.2933
+  },
+  {
+   "id": "r24",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.1824,
+   "y": 0.2876
+  },
+  {
+   "id": "r25",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3257,
+   "y": 0.3108
+  },
+  {
+   "id": "r26",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.2046,
+   "y": 0.3141
+  },
+  {
+   "id": "r27",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.1951,
+   "y": 0.3265
+  },
+  {
+   "id": "r28",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3041,
+   "y": 0.3339
+  },
+  {
+   "id": "r29",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3834,
+   "y": 0.3431
+  },
+  {
+   "id": "r30",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.2654,
+   "y": 0.3692
+  },
+  {
+   "id": "r31",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.2909,
+   "y": 0.3604
+  },
+  {
+   "id": "r32",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.1402,
+   "y": 0.3926
+  },
+  {
+   "id": "r33",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.4381,
+   "y": 0.4005
+  },
+  {
+   "id": "r34",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3673,
+   "y": 0.4176
+  },
+  {
+   "id": "r35",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.2193,
+   "y": 0.4327
+  },
+  {
+   "id": "r36",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3888,
+   "y": 0.4302
+  },
+  {
+   "id": "r37",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3438,
+   "y": 0.4575
+  },
+  {
+   "id": "r38",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3115,
+   "y": 0.4672
+  },
+  {
+   "id": "r39",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.4191,
+   "y": 0.4741
+  },
+  {
+   "id": "r40",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3761,
+   "y": 0.4833
+  },
+  {
+   "id": "r41",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.2428,
+   "y": 0.5109
+  },
+  {
+   "id": "r42",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.4593,
+   "y": 0.5139
+  },
+  {
+   "id": "r43",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.21,
+   "y": 0.5172
+  },
+  {
+   "id": "r44",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3349,
+   "y": 0.5246
+  },
+  {
+   "id": "r45",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.398,
+   "y": 0.5416
+  },
+  {
+   "id": "r46",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.4514,
+   "y": 0.5568
+  },
+  {
+   "id": "r47",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.1882,
+   "y": 0.5862
+  },
+  {
+   "id": "r48",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3973,
+   "y": 0.8343
+  },
+  {
+   "id": "r49",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.0858,
+   "y": 0.8691
+  },
+  {
+   "id": "r50",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.2549,
+   "y": 0.8664
+  },
+  {
+   "id": "r51",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.0429,
+   "y": 0.8863
+  },
+  {
+   "id": "r52",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3088,
+   "y": 0.9069
+  },
+  {
+   "id": "r53",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3105,
+   "y": 0.9218
+  },
+  {
+   "id": "r54",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.2467,
+   "y": 0.9357
+  },
+  {
+   "id": "r55",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.1409,
+   "y": 0.9453
+  },
+  {
+   "id": "r56",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.384,
+   "y": 0.9599
+  },
+  {
+   "id": "r57",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.1062,
+   "y": 0.9692
+  },
+  {
+   "id": "r58",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.173,
+   "y": 0.9887
+  },
+  {
+   "id": "r59",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3758,
+   "y": 0.9898
+  },
+  {
+   "id": "r60",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.2392,
+   "y": 0.9941
+  },
+  {
+   "id": "b1",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5026,
+   "y": 0.0105
+  },
+  {
+   "id": "b2",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5059,
+   "y": 0.0284
+  },
+  {
+   "id": "b3",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5137,
+   "y": 0.067
+  },
+  {
+   "id": "b4",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5678,
+   "y": 0.0635
+  },
+  {
+   "id": "b5",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5681,
+   "y": 0.0784
+  },
+  {
+   "id": "b6",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5145,
+   "y": 0.0824
+  },
+  {
+   "id": "b7",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5778,
+   "y": 0.0972
+  },
+  {
+   "id": "b8",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.4248,
+   "y": 0.1503
+  },
+  {
+   "id": "b9",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.4379,
+   "y": 0.1503
+  },
+  {
+   "id": "b10",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5042,
+   "y": 0.1591
+  },
+  {
+   "id": "b11",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.4304,
+   "y": 0.1657
+  },
+  {
+   "id": "b12",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5477,
+   "y": 0.1739
+  },
+  {
+   "id": "b13",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5403,
+   "y": 0.1873
+  },
+  {
+   "id": "b14",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5169,
+   "y": 0.2753
+  },
+  {
+   "id": "b15",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5059,
+   "y": 0.2824
+  },
+  {
+   "id": "b16",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.515,
+   "y": 0.2954
+  },
+  {
+   "id": "b17",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.4431,
+   "y": 0.3137
+  },
+  {
+   "id": "b18",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.444,
+   "y": 0.3285
+  },
+  {
+   "id": "b19",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.4608,
+   "y": 0.3451
+  },
+  {
+   "id": "b20",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.451,
+   "y": 0.3529
+  },
+  {
+   "id": "b21",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.4598,
+   "y": 0.3632
+  },
+  {
+   "id": "b22",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.4902,
+   "y": 0.4157
+  },
+  {
+   "id": "b23",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5059,
+   "y": 0.4157
+  },
+  {
+   "id": "b24",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5368,
+   "y": 0.4225
+  },
+  {
+   "id": "b25",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.498,
+   "y": 0.4268
+  },
+  {
+   "id": "b26",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5078,
+   "y": 0.4353
+  },
+  {
+   "id": "b27",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5224,
+   "y": 0.4345
+  },
+  {
+   "id": "b28",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5163,
+   "y": 0.4523
+  },
+  {
+   "id": "b29",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5537,
+   "y": 0.4918
+  },
+  {
+   "id": "b30",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5882,
+   "y": 0.5176
+  },
+  {
+   "id": "b31",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.6039,
+   "y": 0.5196
+  },
+  {
+   "id": "b32",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5595,
+   "y": 0.5203
+  },
+  {
+   "id": "b33",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5695,
+   "y": 0.5291
+  },
+  {
+   "id": "b34",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.4422,
+   "y": 0.5265
+  },
+  {
+   "id": "b35",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5961,
+   "y": 0.5294
+  },
+  {
+   "id": "b36",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.4523,
+   "y": 0.5327
+  },
+  {
+   "id": "b37",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.4387,
+   "y": 0.5417
+  },
+  {
+   "id": "b38",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.458,
+   "y": 0.5506
+  },
+  {
+   "id": "b39",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5399,
+   "y": 0.6523
+  },
+  {
+   "id": "b40",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.4176,
+   "y": 0.698
+  },
+  {
+   "id": "b41",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.4203,
+   "y": 0.7124
+  },
+  {
+   "id": "b42",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5131,
+   "y": 0.7235
+  },
+  {
+   "id": "b43",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.3735,
+   "y": 0.7284
+  },
+  {
+   "id": "b44",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.3867,
+   "y": 0.731
+  },
+  {
+   "id": "b45",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5327,
+   "y": 0.7407
+  },
+  {
+   "id": "b46",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.4693,
+   "y": 0.7359
+  },
+  {
+   "id": "b47",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5137,
+   "y": 0.7382
+  },
+  {
+   "id": "b48",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.3804,
+   "y": 0.7461
+  },
+  {
+   "id": "b49",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.4765,
+   "y": 0.7503
+  },
+  {
+   "id": "b50",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.502,
+   "y": 0.7569
+  },
+  {
+   "id": "b51",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5029,
+   "y": 0.775
+  },
+  {
+   "id": "b52",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5302,
+   "y": 0.7812
+  },
+  {
+   "id": "b53",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5443,
+   "y": 0.7812
+  },
+  {
+   "id": "b54",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.3902,
+   "y": 0.7895
+  },
+  {
+   "id": "b55",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5373,
+   "y": 0.795
+  },
+  {
+   "id": "b56",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.4973,
+   "y": 0.8008
+  },
+  {
+   "id": "b57",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.4824,
+   "y": 0.8039
+  },
+  {
+   "id": "b58",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.8288,
+   "y": 0.8092
+  },
+  {
+   "id": "b59",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.8412,
+   "y": 0.8118
+  },
+  {
+   "id": "b60",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.4902,
+   "y": 0.8137
+  },
+  {
+   "id": "b61",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.7784,
+   "y": 0.8235
+  },
+  {
+   "id": "b62",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.834,
+   "y": 0.8288
+  },
+  {
+   "id": "b63",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.7786,
+   "y": 0.8401
+  },
+  {
+   "id": "b64",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.4331,
+   "y": 0.8314
+  }
+ ],
+ "pois": [
+  {
+   "id": "p1",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.1824,
+   "y": 0.1824
+  },
+  {
+   "id": "p2",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.2049,
+   "y": 0.2108
+  },
+  {
+   "id": "p3",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.2118,
+   "y": 0.2204
+  },
+  {
+   "id": "p4",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.2885,
+   "y": 0.2616
+  },
+  {
+   "id": "p5",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.1718,
+   "y": 0.2635
+  },
+  {
+   "id": "p6",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.1716,
+   "y": 0.2755
+  },
+  {
+   "id": "p7",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.3748,
+   "y": 0.307
+  },
+  {
+   "id": "p8",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.293,
+   "y": 0.3182
+  },
+  {
+   "id": "p9",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.1429,
+   "y": 0.3714
+  },
+  {
+   "id": "p10",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.3802,
+   "y": 0.382
+  },
+  {
+   "id": "p11",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.2404,
+   "y": 0.5071
+  },
+  {
+   "id": "p12",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.3231,
+   "y": 0.5244
+  },
+  {
+   "id": "p13",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.4039,
+   "y": 0.6647
+  },
+  {
+   "id": "p14",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.2373,
+   "y": 0.8637
+  },
+  {
+   "id": "p15",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.3882,
+   "y": 0.8618
+  },
+  {
+   "id": "p16",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.2235,
+   "y": 0.9431
+  },
+  {
+   "id": "p17",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.349,
+   "y": 0.9706
+  },
+  {
+   "id": "p18",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.3824,
+   "y": 0.9745
+  },
+  {
+   "id": "p19",
+   "color": "purple",
+   "type": "haiku",
+   "x": 0.8192,
+   "y": 0.9926
+  },
+  {
+   "id": "r1",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.257,
+   "y": 0.0116
+  },
+  {
+   "id": "r2",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3733,
+   "y": 0.0024
+  },
+  {
+   "id": "r3",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.2471,
+   "y": 0.0779
+  },
+  {
+   "id": "r4",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.4037,
+   "y": 0.0763
+  },
+  {
+   "id": "r5",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.2337,
+   "y": 0.103
+  },
+  {
+   "id": "r6",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3422,
+   "y": 0.1161
+  },
+  {
+   "id": "r7",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3076,
+   "y": 0.1163
+  },
+  {
+   "id": "r8",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.1897,
+   "y": 0.1398
+  },
+  {
+   "id": "r9",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3824,
+   "y": 0.1452
+  },
+  {
+   "id": "r10",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.2216,
+   "y": 0.1451
+  },
+  {
+   "id": "r11",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.2583,
+   "y": 0.1522
+  },
+  {
+   "id": "r12",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3948,
+   "y": 0.1651
+  },
+  {
+   "id": "r13",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3184,
+   "y": 0.1826
+  },
+  {
+   "id": "r14",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.1666,
+   "y": 0.1864
+  },
+  {
+   "id": "r15",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.2244,
+   "y": 0.2041
+  },
+  {
+   "id": "r16",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3442,
+   "y": 0.2064
+  },
+  {
+   "id": "r17",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.1432,
+   "y": 0.2059
+  },
+  {
+   "id": "r18",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3092,
+   "y": 0.2133
+  },
+  {
+   "id": "r19",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.1692,
+   "y": 0.2301
+  },
+  {
+   "id": "r20",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.1986,
+   "y": 0.2318
+  },
+  {
+   "id": "r21",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.4259,
+   "y": 0.2575
+  },
+  {
+   "id": "r22",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.2961,
+   "y": 0.2606
+  },
+  {
+   "id": "r23",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3875,
+   "y": 0.2933
+  },
+  {
+   "id": "r24",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.1824,
+   "y": 0.2876
+  },
+  {
+   "id": "r25",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3257,
+   "y": 0.3108
+  },
+  {
+   "id": "r26",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.2046,
+   "y": 0.3141
+  },
+  {
+   "id": "r27",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.1951,
+   "y": 0.3265
+  },
+  {
+   "id": "r28",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3041,
+   "y": 0.3339
+  },
+  {
+   "id": "r29",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3834,
+   "y": 0.3431
+  },
+  {
+   "id": "r30",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.2654,
+   "y": 0.3692
+  },
+  {
+   "id": "r31",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.2909,
+   "y": 0.3604
+  },
+  {
+   "id": "r32",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.1402,
+   "y": 0.3926
+  },
+  {
+   "id": "r33",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.4381,
+   "y": 0.4005
+  },
+  {
+   "id": "r34",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3673,
+   "y": 0.4176
+  },
+  {
+   "id": "r35",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.2193,
+   "y": 0.4327
+  },
+  {
+   "id": "r36",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3888,
+   "y": 0.4302
+  },
+  {
+   "id": "r37",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3438,
+   "y": 0.4575
+  },
+  {
+   "id": "r38",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3115,
+   "y": 0.4672
+  },
+  {
+   "id": "r39",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.4191,
+   "y": 0.4741
+  },
+  {
+   "id": "r40",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3761,
+   "y": 0.4833
+  },
+  {
+   "id": "r41",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.2428,
+   "y": 0.5109
+  },
+  {
+   "id": "r42",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.4593,
+   "y": 0.5139
+  },
+  {
+   "id": "r43",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.21,
+   "y": 0.5172
+  },
+  {
+   "id": "r44",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3349,
+   "y": 0.5246
+  },
+  {
+   "id": "r45",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.398,
+   "y": 0.5416
+  },
+  {
+   "id": "r46",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.4514,
+   "y": 0.5568
+  },
+  {
+   "id": "r47",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.1882,
+   "y": 0.5862
+  },
+  {
+   "id": "r48",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3973,
+   "y": 0.8343
+  },
+  {
+   "id": "r49",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.0858,
+   "y": 0.8691
+  },
+  {
+   "id": "r50",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.2549,
+   "y": 0.8664
+  },
+  {
+   "id": "r51",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.0429,
+   "y": 0.8863
+  },
+  {
+   "id": "r52",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3088,
+   "y": 0.9069
+  },
+  {
+   "id": "r53",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3105,
+   "y": 0.9218
+  },
+  {
+   "id": "r54",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.2467,
+   "y": 0.9357
+  },
+  {
+   "id": "r55",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.1409,
+   "y": 0.9453
+  },
+  {
+   "id": "r56",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.384,
+   "y": 0.9599
+  },
+  {
+   "id": "r57",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.1062,
+   "y": 0.9692
+  },
+  {
+   "id": "r58",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.173,
+   "y": 0.9887
+  },
+  {
+   "id": "r59",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.3758,
+   "y": 0.9898
+  },
+  {
+   "id": "r60",
+   "color": "red",
+   "type": "collectible",
+   "x": 0.2392,
+   "y": 0.9941
+  },
+  {
+   "id": "b1",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5026,
+   "y": 0.0105
+  },
+  {
+   "id": "b2",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5059,
+   "y": 0.0284
+  },
+  {
+   "id": "b3",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5137,
+   "y": 0.067
+  },
+  {
+   "id": "b4",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5678,
+   "y": 0.0635
+  },
+  {
+   "id": "b5",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5681,
+   "y": 0.0784
+  },
+  {
+   "id": "b6",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5145,
+   "y": 0.0824
+  },
+  {
+   "id": "b7",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5778,
+   "y": 0.0972
+  },
+  {
+   "id": "b8",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.4248,
+   "y": 0.1503
+  },
+  {
+   "id": "b9",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.4379,
+   "y": 0.1503
+  },
+  {
+   "id": "b10",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5042,
+   "y": 0.1591
+  },
+  {
+   "id": "b11",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.4304,
+   "y": 0.1657
+  },
+  {
+   "id": "b12",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5477,
+   "y": 0.1739
+  },
+  {
+   "id": "b13",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5403,
+   "y": 0.1873
+  },
+  {
+   "id": "b14",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5169,
+   "y": 0.2753
+  },
+  {
+   "id": "b15",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5059,
+   "y": 0.2824
+  },
+  {
+   "id": "b16",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.515,
+   "y": 0.2954
+  },
+  {
+   "id": "b17",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.4431,
+   "y": 0.3137
+  },
+  {
+   "id": "b18",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.444,
+   "y": 0.3285
+  },
+  {
+   "id": "b19",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.4608,
+   "y": 0.3451
+  },
+  {
+   "id": "b20",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.451,
+   "y": 0.3529
+  },
+  {
+   "id": "b21",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.4598,
+   "y": 0.3632
+  },
+  {
+   "id": "b22",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.4902,
+   "y": 0.4157
+  },
+  {
+   "id": "b23",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5059,
+   "y": 0.4157
+  },
+  {
+   "id": "b24",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5368,
+   "y": 0.4225
+  },
+  {
+   "id": "b25",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.498,
+   "y": 0.4268
+  },
+  {
+   "id": "b26",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5078,
+   "y": 0.4353
+  },
+  {
+   "id": "b27",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5224,
+   "y": 0.4345
+  },
+  {
+   "id": "b28",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5163,
+   "y": 0.4523
+  },
+  {
+   "id": "b29",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5537,
+   "y": 0.4918
+  },
+  {
+   "id": "b30",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5882,
+   "y": 0.5176
+  },
+  {
+   "id": "b31",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.6039,
+   "y": 0.5196
+  },
+  {
+   "id": "b32",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5595,
+   "y": 0.5203
+  },
+  {
+   "id": "b33",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5695,
+   "y": 0.5291
+  },
+  {
+   "id": "b34",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.4422,
+   "y": 0.5265
+  },
+  {
+   "id": "b35",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5961,
+   "y": 0.5294
+  },
+  {
+   "id": "b36",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.4523,
+   "y": 0.5327
+  },
+  {
+   "id": "b37",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.4387,
+   "y": 0.5417
+  },
+  {
+   "id": "b38",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.458,
+   "y": 0.5506
+  },
+  {
+   "id": "b39",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5399,
+   "y": 0.6523
+  },
+  {
+   "id": "b40",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.4176,
+   "y": 0.698
+  },
+  {
+   "id": "b41",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.4203,
+   "y": 0.7124
+  },
+  {
+   "id": "b42",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5131,
+   "y": 0.7235
+  },
+  {
+   "id": "b43",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.3735,
+   "y": 0.7284
+  },
+  {
+   "id": "b44",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.3867,
+   "y": 0.731
+  },
+  {
+   "id": "b45",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5327,
+   "y": 0.7407
+  },
+  {
+   "id": "b46",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.4693,
+   "y": 0.7359
+  },
+  {
+   "id": "b47",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5137,
+   "y": 0.7382
+  },
+  {
+   "id": "b48",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.3804,
+   "y": 0.7461
+  },
+  {
+   "id": "b49",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.4765,
+   "y": 0.7503
+  },
+  {
+   "id": "b50",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.502,
+   "y": 0.7569
+  },
+  {
+   "id": "b51",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5029,
+   "y": 0.775
+  },
+  {
+   "id": "b52",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5302,
+   "y": 0.7812
+  },
+  {
+   "id": "b53",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5443,
+   "y": 0.7812
+  },
+  {
+   "id": "b54",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.3902,
+   "y": 0.7895
+  },
+  {
+   "id": "b55",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.5373,
+   "y": 0.795
+  },
+  {
+   "id": "b56",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.4973,
+   "y": 0.8008
+  },
+  {
+   "id": "b57",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.4824,
+   "y": 0.8039
+  },
+  {
+   "id": "b58",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.8288,
+   "y": 0.8092
+  },
+  {
+   "id": "b59",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.8412,
+   "y": 0.8118
+  },
+  {
+   "id": "b60",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.4902,
+   "y": 0.8137
+  },
+  {
+   "id": "b61",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.7784,
+   "y": 0.8235
+  },
+  {
+   "id": "b62",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.834,
+   "y": 0.8288
+  },
+  {
+   "id": "b63",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.7786,
+   "y": 0.8401
+  },
+  {
+   "id": "b64",
+   "color": "blue",
+   "type": "shrine",
+   "x": 0.4331,
+   "y": 0.8314
+  }
+ ]
+}
