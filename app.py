@@ -345,6 +345,25 @@ def debug_env():
         "env_keys": [k for k in os.environ if "GEMINI" in k.upper() or "KEY" in k.upper()],
     }
 
+
+
+@app.get("/debug/gemini-test")
+def gemini_test():
+    """Временный: проверить, работает ли GEMINI_API_KEY"""
+    import os
+    import google.generativeai as genai
+    key = os.environ.get("GEMINI_API_KEY", "")
+    if not key:
+        return {"status": "error", "message": "GEMINI_API_KEY not set"}
+    try:
+        genai.configure(api_key=key)
+        m = genai.GenerativeModel("gemini-2.0-flash")
+        r = m.generate_content("Привет, ответь одним словом: 2+2=", 
+                              generation_config={"max_output_tokens": 10})
+        return {"status": "success", "answer": r.text}
+    except Exception as e:
+        return {"status": "error", "error": str(e)[:200]}
+
 @app.get("/health")
 def health():
     return {"ok": True, "engine_loaded": default_engine is not None}
