@@ -173,9 +173,22 @@ async def alice_webhook(request: Request):
     s = get_or_create_session(alice_session_id)
     ctx = s["context"]
     
-    # Служебные команды
+    # Служебные команды (быстрые, без LLM)
     if lower in ("стоп", "тише", "хватит", "молчи"):
         return _alice_response("", True, session_data)
+    
+    if lower in ("пинг", "ping", "тест"):
+        return _alice_response("Понял. Работаю.", False, session_data)
+    
+    if lower in ("помощь", "что ты умеешь", "команды"):
+        return _alice_response(
+            "Я могу подсказать по игре: где хайку, маяк, источник, святилище, "
+            "какую стойку выбрать, как пройти босса. Просто спроси — например: «Алиса, где хайку?»",
+            False, session_data
+        )
+    
+    if lower in ("спасибо", "спс", "благодарю", "ок", "ладно"):
+        return _alice_response("Всегда рад помочь!", False, session_data)
     
     # Обновление контекста
     if lower.startswith("я в ") or lower.startswith("я на "):
