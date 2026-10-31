@@ -142,8 +142,18 @@ class Engine:
             return {"answer":"Не уверен, не нашёл в базе.",
                     "voice":"Не уверен. Попробуй иначе.","overlay":None,
                     "confidence":0.3,"used_llm":False,"sources":[],"follow_up":None}
-        ctx = "\n".join(f"[{aid}] {self.articles[aid].get('title','')}\n"
-                        f"{self.articles[aid].get('summary','')}" for aid,_ in hits) or "(нет)"
+        # Используем ВСЮ базу (все статьи), а не только hits
+        # Используем ВСЮ базу (все статьи) для контекста Gemini
+        ctx = "\n".join(f"[{aid}] {a.get('title','')}\n{a.get('summary','')}" 
+                        for aid, a in self.articles.items()) or "(нет)"
+        
+        # Добавляем результаты FTS-поиска в контекст, чтобы Gemini видел релевантные статьи
+        fts_hits = self.fts_search(q, limit=5)
+        if fts_hits:
+            ctx += "\n\n[FTS HITS]\n" + "\n".join(
+                f"- {self.articles[h[0]].get('title','?')} (score: {h[1]:.2f})"
+                for h in fts_hits
+            )
         try:
             import google.generativeai as genai
             genai.configure(api_key=self._gemini_key)
@@ -151,6 +161,7 @@ class Engine:
             r = m.generate_content(
                 "Ты голосовой ассистент по игре " + self.game +
                 ". Ответь короче 2 предложений, без воды. Только по CONTEXT.\n"
+                "Если ответа нет в CONTEXT — скажи «не нашёл».\n"
                 "CONTEXT:\n" + ctx + "\nВОПРОС: " + q,
                 generation_config={"temperature":0.1,"max_output_tokens":200})
             return {"answer":r.text.strip(),"voice":r.text.strip(),
