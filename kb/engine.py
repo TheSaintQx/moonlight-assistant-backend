@@ -3,6 +3,7 @@
 Работает с ОДНИМ файлом, где есть "articles" и (опционально) "faq".
 """
 import json
+import os
 import re
 import sqlite3
 from difflib import SequenceMatcher
@@ -146,7 +147,7 @@ class Engine:
         try:
             import google.generativeai as genai
             genai.configure(api_key=self._gemini_key)
-            m = genai.GenerativeModel("gemini-2.0-flash")
+            m = genai.GenerativeModel(os.environ.get("LLM_MODEL", "gemini-flash-latest"))
             r = m.generate_content(
                 "Ты голосовой ассистент по игре " + self.game +
                 ". Ответь короче 2 предложений, без воды. Только по CONTEXT.\n"
