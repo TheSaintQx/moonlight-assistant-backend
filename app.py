@@ -335,6 +335,16 @@ def overlay_pending(authorization: str = Header(default="")):
     # Пока передаем как есть, или можем маппить если нужно
     return {"overlay": overlay}
 
+@app.get("/debug/env")
+def debug_env():
+    """Временный: проверить, какие env-переменные загружены"""
+    import os
+    return {
+        "gemini_key_set": bool(os.environ.get("GEMINI_API_KEY", "")),
+        "gemini_key_length": len(os.environ.get("GEMINI_API_KEY", "")),
+        "env_keys": [k for k in os.environ if "GEMINI" in k.upper() or "KEY" in k.upper()],
+    }
+
 @app.get("/health")
 def health():
     return {"ok": True, "engine_loaded": default_engine is not None}
