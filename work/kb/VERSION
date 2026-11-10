@@ -1,0 +1,5 @@
+function=moon-knowledge-engine
+version=0.9.3
+release=1.1.3-fandom-language-source
+runtime=nodejs22
+handler=index.handler
